@@ -1,0 +1,39 @@
+
+      <div class="jumbotron">
+        <div class="container text-center mb-1">
+          <h1 class="display-3">Bienvenue sur Event-Brite-clone!</h1>
+          <p>Vous pourrez vous inscrire à vos évènements préféré en un simple clic et surtout Profitez de nos réduction du moment!</p>
+
+          <hr class="mb-5" width="70%" color=#c9c9c9>
+          <% if current_user %>
+            <div class="text-center"><%= link_to "Créer un évènement", new_event_path, :class => "btn btn-info link"%></div>
+            <% else %>
+              <div class="text-center">
+                <button class="btn btn-info disabled">Créer un évènement</button>
+              </div>
+          <% end %>
+        </div>
+      </div>
+
+      <div class="container">
+        <div class="row">
+          <% @events.order(:id).reverse.each do |event| %>
+          <div class="col-md-4 mb-4">
+            <div class="card" style="width: 22rem;">
+              <img class="card-img-top" src="https://www.newstatesman.com/sites/all/themes/creative-responsive-theme/images/new_statesman_events.jpg" width="318" height="110" alt="Card image cap">
+              <div class="card-body">
+                <h5 class="card-title"><%= event.title %></h5>
+                <p class="card-text small text-muted mb-auto"><%= event.start_date.strftime("%a, %h, %Y à %Hh%M") %></p>
+                <p class="card-text small text-muted mb-2"><%= event.location %></p>
+                <p class="card-text small text-muted">Prix: <%= event.price %>€</p>
+              </div>
+            </div>
+          </div>
+          <% end %>
+        </div>
+        <hr>
+      </div>
+
+    <footer class="container text-center">
+      <p>&copy; Event-Brite | Clone - 2018</p>
+    </footer>

@@ -29,7 +29,8 @@ p '#' * 60
 
   10.times do
   User.create!( email: "#{Faker::Name.first_name}@yopmail.com",
-                encrypted_password: 'azerty1234',
+                password: 'azerty1234',
+                password_confirmation: 'azerty1234',
                 description: Faker::Quote.unique.matz,
                 first_name: Faker::Name.unique.first_name,
                 last_name: Faker::Name.unique.last_name
@@ -45,7 +46,8 @@ p '#' * 60
                   title: Faker::Coffee.blend_name,
                   description: Faker::Quote.unique.matz,
                   price: rand(1..1000),
-                  location: Faker::Address.city
+                  location: Faker::Address.city,
+                  admin_id: rand(User.first.id..User.last.id)
               )
   end
   p 'Création de 10 Evènements dans la BD'
