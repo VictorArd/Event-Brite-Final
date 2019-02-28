@@ -5,6 +5,25 @@ class UserController < ApplicationController
   def show
     @user = User.find(params[:id])
   end
+
+  def edit
+  end
+
+
+
+
+
+
+
+
+  private
+
+  def user_allowed?
+  	unless current_user == User.find(params[:id])
+  		flash[:danger] = "Tu n'es pas autorisée à accéder à ceci"
+  		redirect_to root_path
+  	end
+  end
 end
 
 

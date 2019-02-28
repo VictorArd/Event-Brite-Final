@@ -1,43 +1,72 @@
-<h2>Edit <%= resource_name.to_s.humanize %></h2>
 
-<%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
-  <%= render "devise/shared/error_messages", resource: resource %>
+<h2 class="display-4 mb-3 mx-auto" style="width: 400px;">Editer votre profil</h2>
+<hr class="mb-5" width="50%" color=white>
 
-  <div class="field">
-    <%= f.label :email %><br />
-    <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
-  </div>
+<div class="container">
+  <div class="row">
+    <div class="col-md-4 ml-auto">
+      <img src="https://st2.depositphotos.com/9223672/12056/v/950/depositphotos_120568244-stock-illustration-male-face-avatar-logo-template.jpg" width="180" height="180" class="rounded-circle mb-4" alt="IconAvatar">
+      <h4 class="ml-auto"><%= current_user.first_name %> <%= current_user.last_name %></h4>
+      <div class="small inline"><%= current_user.description %></div>
+      <hr>
+      <h4 class="ml-auto">Dernier évènement créée</h4>
+      <br>
+      <div class="card" style="width: 22rem;">
+        <img class="card-img-top" src="https://www.newstatesman.com/sites/all/themes/creative-responsive-theme/images/new_statesman_events.jpg" width="318" height="110" alt="Card image cap">
+        <div class="card-body">
+          <h5 class="card-title"> <%= current_user.events.last.title %></h5>
+          <p class="card-text small text-muted mb-auto"><%= current_user.events.last.start_date.strftime("%a, %h, %Y à %Hh%M") %></p>
+          <p class="card-text small text-muted mb-2"><%= current_user.events.last.location %></p>
+          <p class="card-text small text-muted">Prix: <%= current_user.events.last.price %>€</p>
+        </div>
+      </div>
 
-  <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
-    <div>Currently waiting confirmation for: <%= resource.unconfirmed_email %></div>
-  <% end %>
+    </div>
 
-  <div class="field">
-    <%= f.label :password %> <i>(leave blank if you don't want to change it)</i><br />
-    <%= f.password_field :password, autocomplete: "new-password" %>
-    <% if @minimum_password_length %>
-      <br />
-      <em><%= @minimum_password_length %> characters minimum</em>
+    <!-- Profil Edit Form -->
+    <div class="col-md-5 ml-auto">
+    <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
+      <%= render "devise/shared/error_messages", resource: resource %>
+
+      <div class="field">
+        <%= f.label :email %><br />
+        <%= f.email_field :email, autofocus: true, autocomplete: "email", class: 'form-control mb-3'%>
+      </div>
+
+      <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
+        <div>En attente de confirmation pour: <%= resource.unconfirmed_email %></div>
+      <% end %>
+
+      <div class="field">
+        <%= f.label "Mot de passe" %> <i><small>(laissez vide si vous ne voulez pas le changer)</small></i><br />
+        <%= f.password_field :password, autocomplete: "new-password", class: 'form-control mb-3' %>
+        <% if @minimum_password_length %>
+          <br />
+          <em><%= @minimum_password_length %> caractères minimum</em>
+        <% end %>
+      </div>
+
+      <div class="field">
+        <%= f.label "Confirmer votre mot de passe" %><br />
+        <%= f.password_field :password_confirmation, autocomplete: "new-password", class: 'form-control mb-3' %>
+      </div>
+<br>
+      <div class="field mb-4">
+        <%= f.label "Mot de passe actuel" %> <span class="small"><i>(nous avons besoin de votre mot de passe actuel pour confirmer vos modifications)</i></span><br />
+        <%= f.password_field :current_password, autocomplete: "current-password", class: 'form-control mb-3' %>
+      </div>
+
+      <div class="actions mb-4">
+        <%= f.submit "Mettre à jour", class: 'btn btn-info btn-sm' %>
+      </div>
     <% end %>
+
+<hr class="mb-4" width="50%" color=white>
+
+    <h5 class="mb-3">Supprimer mon compte</h5>
+    <%= button_to "Cancel my account", registration_path(resource_name), data: { confirm: "Etes-vous sur?" }, method: :delete, class: 'btn btn-secondary btn-sm' %>
+<br>
+    <%= link_to "Retour à l'accueil", :root, class: 'text-muted' %>
+    </div>
   </div>
-
-  <div class="field">
-    <%= f.label :password_confirmation %><br />
-    <%= f.password_field :password_confirmation, autocomplete: "new-password" %>
-  </div>
-
-  <div class="field">
-    <%= f.label :current_password %> <i>(we need your current password to confirm your changes)</i><br />
-    <%= f.password_field :current_password, autocomplete: "current-password" %>
-  </div>
-
-  <div class="actions">
-    <%= f.submit "Update" %>
-  </div>
-<% end %>
-
-<h3>Cancel my account</h3>
-
-<p>Unhappy? <%= button_to "Cancel my account", registration_path(resource_name), data: { confirm: "Are you sure?" }, method: :delete %></p>
-
-<%= link_to "Back", :back %>
+</div>
