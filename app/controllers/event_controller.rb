@@ -26,7 +26,7 @@ class EventController < ApplicationController
     p params
     p '*' * 60
     #start_date pas fait en select
-    @event = Event.new(title: params[:title], start_date: Faker::Date.forward(25), duration: params[:duration], price: params[:price], location: params[:location], admin: current_user)
+    @event = Event.new(title: params[:title], start_date: Faker::Date.forward(25), description: params[:description], duration: params[:duration], price: params[:price], location: params[:location], admin: current_user)
 
     if @event.save
        flash[:success] = "Votre évènement a bien été créé!"
