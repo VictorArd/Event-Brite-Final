@@ -1,2 +1,27 @@
-<h1>Event#show</h1>
-<p>Find me in app/views/event/show.html.erb</p>
+<br><br>
+<div class="container">
+  <div class="row">
+    <div class="col-md-9 mx-auto">
+      <div class="card" style="width: 100%">
+        <img class="card-img-top" src="https://www.newstatesman.com/sites/all/themes/creative-responsive-theme/images/new_statesman_events.jpg" width="318" height="318" alt="Card image cap">
+        <div class="card-body">
+          <h2 class="card-title"><%= @event.title %></h2>
+          <hr align="left" width="42%" color=white>
+          <h2 class="card-title">Descrition:</h2>
+          <p class="card-text"><small><%= @event.description %></small></p>
+          <hr align="left" width="100%" color=white>
+          <h4 class="card-text text-muted">Date: <%= @event.start_date.strftime("%a, %h, %Y à %Hh%M") %></h4>
+          <hr align="left" width="40%" color=white>
+          <h4 class="card-text text-muted mb-2">Location: <%= @event.location %></h4>
+          <hr align="left" width="35%" color=white>
+          <h4 class="card-text text-muted mb-2">Prix: <%= @event.price %>€</h4>
+          <hr align="left" width="13%" color=white>
+          <h5 class="card-text text-muted mb-2"><small>Organisateur: <%= @event.admin.email %></small></h5>
+          <hr align="left" width="30%" color=white>
+          <h5 class="card-text text-muted mb-2"><small>Participation: <%= @attendance.count %></small></h5>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<br><br>

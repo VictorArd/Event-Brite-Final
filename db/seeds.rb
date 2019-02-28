@@ -31,7 +31,7 @@ p '#' * 60
   User.create!( email: "#{Faker::Name.first_name}@yopmail.com",
                 password: 'azerty1234',
                 password_confirmation: 'azerty1234',
-                description: Faker::Quote.unique.matz,
+                description: Faker::Quote.unique.matz[1..1000],
                 first_name: Faker::Name.unique.first_name,
                 last_name: Faker::Name.unique.last_name
               )
@@ -43,7 +43,7 @@ p '#' * 60
   10.times do
   Event.create!(  start_date: Faker::Date.forward(25),
                   duration: 5 * rand(1..10),
-                  title: Faker::Coffee.blend_name,
+                  title: Faker::Coffee.blend_name[4..140],
                   description: Faker::Quote.unique.matz,
                   price: rand(1..1000),
                   location: Faker::Address.city,
