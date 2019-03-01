@@ -4,11 +4,14 @@
 
 <div class="container">
   <div class="row">
+
     <div class="col-md-4 ml-auto">
+
       <img src="https://st2.depositphotos.com/9223672/12056/v/950/depositphotos_120568244-stock-illustration-male-face-avatar-logo-template.jpg" width="180" height="180" class="rounded-circle mb-4" alt="IconAvatar">
       <h4 class="ml-auto"><%= current_user.first_name %> <%= current_user.last_name %></h4>
       <div class="small inline"><%= current_user.description %></div>
       <hr>
+      <% if current_user.events.count > 0 %>
       <h4 class="ml-auto">Dernier évènement créée</h4>
       <br>
       <div class="card" style="width: 22rem;">
@@ -20,14 +23,15 @@
           <p class="card-text small text-muted">Prix: <%= current_user.events.last.price %>€</p>
         </div>
       </div>
-
+      <% else %>
+      <h5 class="text-muted">Vous n'avez pas d'évènement.</h5>
+      <% end %>
     </div>
 
     <!-- Profil Edit Form -->
-    <div class="col-md-5 ml-auto">
+    <div class="col-md-5 ml-auto"
     <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
       <%= render "devise/shared/error_messages", resource: resource %>
-
       <div class="field">
         <%= f.label :email %><br />
         <%= f.email_field :email, autofocus: true, autocomplete: "email", class: 'form-control mb-3'%>
@@ -57,14 +61,14 @@
       </div>
 
       <div class="actions mb-4">
-        <%= f.submit "Mettre à jour", class: 'btn btn-info btn-sm' %>
+        <%= f.submit "Mettre à jour mes informations", class: 'btn btn-info btn-sm' %>
       </div>
     <% end %>
 
 <hr class="mb-4" width="50%" color=white>
 
     <h5 class="mb-3">Supprimer mon compte</h5>
-    <%= button_to "Cancel my account", registration_path(resource_name), data: { confirm: "Etes-vous sur?" }, method: :delete, class: 'btn btn-secondary btn-sm' %>
+    <%= button_to "Supprimer", registration_path(resource_name), data: { confirm: "Etes-vous sur?" }, method: :delete, class: 'btn btn-secondary btn-sm' %>
 <br>
     <%= link_to "Retour à l'accueil", :root, class: 'text-muted' %>
     </div>

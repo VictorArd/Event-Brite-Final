@@ -57,7 +57,7 @@
 </div>
 
 <br>
-
+<% if current_user.events.count > 0 %>
 <div class="container">
   <div class="row">
 	    <% @user.events.each do |event| %>
@@ -75,3 +75,6 @@
       <% end %>
  </div>
 </div>
+<% else %>
+<h6 class="text-muted text-center">Vous n'avez pas d'évènement.</h6>
+<% end %>
