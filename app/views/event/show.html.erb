@@ -18,7 +18,16 @@
           <hr align="left" width="13%" color=white>
           <h5 class="card-text text-muted mb-2"><small>Organisateur: <%= @event.admin.email %></small></h5>
           <hr align="left" width="30%" color=white>
-          <h5 class="card-text text-muted mb-2"><small>Participation: <%= @attendance.count %></small></h5>
+          <h5 class="card-text text-muted mb-4"><small>Participation: <%= @attendance.count %></small></h5>
+          <center>
+          <% if current_user %>
+            <% if @event.users.include?(current_user) %>
+        		<p><strong>Vous êtes inscrit à cet événement</strong></p>
+        		<% else %>
+        			<%= link_to "S'inscrire à cet événement", new_event_attendance_path(@event.id), :class => "btn btn-secondary mt-1"%>
+        		<% end %>
+          <% end %>
+          </center>
         </div>
       </div>
     </div>

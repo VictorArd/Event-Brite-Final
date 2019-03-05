@@ -4,7 +4,11 @@ Rails.application.routes.draw do
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 
   root 'event#index'
-  resources 'event'
+
+  resources 'event' do
+  	resources :attendance
+  end
+
   resources 'user', only: [ :show ]
 
 end
