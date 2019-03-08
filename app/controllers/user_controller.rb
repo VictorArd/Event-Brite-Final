@@ -11,11 +11,6 @@ class UserController < ApplicationController
 
 
 
-
-
-
-
-
   private
 
   def user_allowed?
@@ -25,13 +20,3 @@ class UserController < ApplicationController
   	end
   end
 end
-
-
-  private
-
-  def user_allowed?
-  	unless current_user == User.find(params[:id])
-  		flash[:danger] = "Tu n'es pas autorisée à accéder à ceci"
-  		redirect_to root_path
-  	end
-  end
