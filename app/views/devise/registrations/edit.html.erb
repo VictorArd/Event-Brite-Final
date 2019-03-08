@@ -17,7 +17,7 @@
       <div class="card" style="width: 22rem;">
         <img class="card-img-top" src="https://www.newstatesman.com/sites/all/themes/creative-responsive-theme/images/new_statesman_events.jpg" width="318" height="110" alt="Card image cap">
         <div class="card-body">
-          <h5 class="card-title"> <%= current_user.events.last.title %></h5>
+          <h5 class="card-title"><%= link_to current_user.events.last.title, event_path(current_user.events.last.id), :class => "link text-dark"%></h5>
           <p class="card-text small text-muted mb-auto"><%= current_user.events.last.start_date.strftime("%a, %h, %Y à %Hh%M") %></p>
           <p class="card-text small text-muted mb-2"><%= current_user.events.last.location %></p>
           <p class="card-text small text-muted">Prix: <%= current_user.events.last.price %>€</p>

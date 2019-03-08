@@ -1,2 +1,41 @@
-<h1>Attendance#show</h1>
-<p>Find me in app/views/attendance/show.html.erb</p>
+<br><br><br>
+<% if signed_in? %>
+  <% if current_user == @event.admin %>
+    <% if @attendances.count > 0 %>
+      <div class="container">
+        <div class="row">
+          <div class="col-sm">
+            <div class="card" style="width: 30rem;">
+              <img class="card-img-top" src="https://www.newstatesman.com/sites/all/themes/creative-responsive-theme/images/new_statesman_events.jpg" width="300" height="200" alt="Card image cap">
+              <div class="card-body">
+                <h5 class="card-title"><%= @event.title %></h5>
+                <p class="card-text small text-muted mb-auto">Description: <br /><%= @event.description %></p><br />
+                <p class="card-text small text-muted mb-auto">Date: <%= @event.start_date.strftime("%a, %h, %Y à %Hh%M") %></p>
+                <p class="card-text small text-muted mb-2">Location: <%= @event.location %></p>
+                <p class="card-text small text-muted">Prix: <%= @event.price %>€</p>
+              </div>
+            </div>
+          </div>
+          <div class="col-sm">
+            <ul class="list-group">
+            <% @count = 0 %>
+              <% @attendances.each do |attendees| %>
+              <li class="list-group-item">
+                <span>
+                  <img src="https://st2.depositphotos.com/9223672/12056/v/950/depositphotos_120568244-stock-illustration-male-face-avatar-logo-template.jpg"width="80" height="80" class="float-left rounded-circle" alt="Card image cap">
+                </span>
+                <h6 class="float-right badge badge-secondary"><%= @count += 1 %></h6><br>
+                <h6 class="ml-4 float-left"><%= attendees.user.first_name %> <%= attendees.user.last_name %></h6>
+                <h6 class="ml-4 float-left"><%= attendees.user.email %></h6>
+              </li>
+            <% end %>
+            </ul>
+          </div>
+        </div>
+      </div>
+    <% else %>
+      <h1 class="text-center text-muted">Vous n'avez pas encore de participants à votre évènement.</h1>
+    <% end %>
+  <% end %>
+<% end %>
+<br><br><br>

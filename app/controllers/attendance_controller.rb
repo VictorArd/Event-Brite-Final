@@ -3,6 +3,8 @@ class AttendanceController < ApplicationController
   end
 
   def show
+    @event = Event.find(params[:id])
+		@attendances = Attendance.all.where(event_id: params[:id])
   end
 
   def new

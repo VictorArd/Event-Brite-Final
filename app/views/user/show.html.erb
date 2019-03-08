@@ -65,7 +65,7 @@
         <div class="card" style="width: 22rem;">
           <img class="card-img-top" src="https://www.newstatesman.com/sites/all/themes/creative-responsive-theme/images/new_statesman_events.jpg" width="318" height="110" alt="Card image cap">
           <div class="card-body">
-            <h5 class="card-title"><%= event.title %></h5>
+            <h5 class="card-title"><%= link_to event.title, event_path(event.id), :class => "link text-dark"%></h5>
             <p class="card-text small text-muted mb-auto"><%= event.start_date.strftime("%a, %h, %Y à %Hh%M") %></p>
             <p class="card-text small text-muted mb-2"><%= event.location %></p>
             <p class="card-text small text-muted">Prix: <%= event.price %>€</p>

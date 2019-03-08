@@ -3,11 +3,12 @@ require 'faker'
 class EventController < ApplicationController
 
   before_action :authenticate_user!, only: [:new, :create]
+  before_action :current_user_is_admin?, only: [:edit, :destroy]
 
   def show
     @event = Event.find(params[:id])
     #Participation: Pas sur que ce soit bon
-     @attendance = Attendance.all.where(event_id: params[:id])
+    @attendance = Attendance.all.where(event_id: params[:id])
   end
 
   def index
@@ -30,35 +31,49 @@ class EventController < ApplicationController
 
     if @event.save
        flash[:success] = "Votre évènement a bien été créé!"
-       redirect_to event_path(current_user.events.last.id)
+       redirect_to root_path
      else
        flash[:danger] = "Une erreur est survenue, veuillez réessayer"
        render :new
    end
   end
 
-  def subscribe
+  def edit
+    @event = Event.find(params[:id])
+  end
 
+  def update
+    @event = Event.find(params[:id])
+    post_params = params.require(:event).permit(:title, :description, :location, :price)
+
+    if @event.update(post_params)
+      flash[:success] = "Votre évènement a été modifié!"
+      redirect_to event_path(@event.id)
+    else
+      flash[:danger] = "Une erreur est survenue, veuillez réessayer"
+      render :edit
+    end
+  end
+
+  def destroy
     @event = Event.find(params[:id])
 
-    @amount = @event.price
+    if @event.destroy
+      flash[:success] = "Votre évènement a été supprimé avec succès!"
+      redirect_to :root
+    else
+      flash[:danger] = "Une erreur est survenue, veuillez réessayer"
+      render event_path(@event.id)
+    end
+  end
 
-    customer = Stripe::Customer.create({
-      email: params[:stripeEmail],
-      source: params[:stripeToken],
-    })
+  private
 
-    charge = Stripe::Charge.create({
-      customer: customer.id,
-      amount: @amount,
-      description: 'Rails Stripe customer',
-      currency: 'usd',
-    })
-
-    rescue Stripe::CardError => e
-    flash[:error] = e.message
-    redirect_to new_charge_path
-
+  def current_user_is_admin?
+    unless current_user == Event.find(params[:id]).admin
+      flash[:danger] = "Vous ne pouvez pas accéder à ceci!"
+      redirect_to root_path
+    end
   end
 
 end

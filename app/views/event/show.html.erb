@@ -20,13 +20,17 @@
           <hr align="left" width="30%" color=white>
           <h5 class="card-text text-muted mb-4"><small>Participation: <%= @attendance.count %></small></h5>
           <center>
-          <% if current_user %>
-            <% if @event.users.include?(current_user) %>
-        		<p><strong>Vous êtes inscrit à cet événement</strong></p>
-        		<% else %>
-        			<%= link_to "S'inscrire à cet événement", new_event_attendance_path(@event.id), :class => "btn btn-secondary mt-1"%>
-        		<% end %>
-          <% end %>
+          <% if signed_in? %>
+              <% if current_user == @event.admin %>
+                <%= link_to "Participants à l'évènement", event_attendance_path(@event.id), :class => "btn btn-info mt-1"%><br><br>
+                <%= link_to "Editez l'évènement", edit_event_path(@event.id), :class => "btn btn-secondary btn-sm mt-1"%>
+                <%= link_to "Supprimer l'évènement", event_path(@event.id), :class => "btn btn-danger btn-sm mt-1", data: { confirm: "Etes-vous sur de vouloir supprimer l'évènement ?", method: 'DELETE' }%>
+              <% elsif @event.users.include?(current_user) %>
+          		  <p><strong>Vous êtes inscrit à cet événement</strong></p>
+          		<% elsif %>
+          			<%= link_to "S'inscrire à cet événement", new_event_attendance_path(@event.id), :class => "btn btn-secondary mt-1"%>
+          		<% end %>
+            <% end %>
           </center>
         </div>
       </div>
