@@ -6,8 +6,16 @@
   <div class="row">
 
     <div class="col-md-4 ml-auto">
+      <%if @user.avatar.attached?%>
+        <%= image_tag @user.avatar, alt: 'avatar', width: '180', height: '180', class: 'rounded-circle mb-4', alt: 'IconAvatar' %>
+      <%else%>
+        <img src="https://st2.depositphotos.com/9223672/12056/v/950/depositphotos_120568244-stock-illustration-male-face-avatar-logo-template.jpg" width="180" height="180" class="float-left rounded-circle mb-4 " alt="IconAvatar">
+      <%end%>
+      <%= form_tag user_avatar_index_path(@user), multipart: true do %>
+        <%= file_field_tag :avatar, class: 'btn btn-sm mb-2' %>
+        <%= submit_tag "mettre à jour", class: 'btn btn-secondary btn-sm mb-3 ml-2' %>
+      <% end %>
 
-      <img src="https://st2.depositphotos.com/9223672/12056/v/950/depositphotos_120568244-stock-illustration-male-face-avatar-logo-template.jpg" width="180" height="180" class="rounded-circle mb-4" alt="IconAvatar">
       <h4 class="ml-auto"><%= current_user.first_name %> <%= current_user.last_name %></h4>
       <div class="small inline"><%= current_user.description %></div>
       <hr>

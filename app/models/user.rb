@@ -3,11 +3,12 @@ class User < ApplicationRecord
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
-         
+
   #
   has_many :attendances
   has_many :events, through: :attendances
   has_many :created_events, foreign_key: 'admin_id', class_name: "Event"
+  has_one_attached :avatar
 
   #Validations
   validates :first_name, presence: true, length: { minimum: 3 }

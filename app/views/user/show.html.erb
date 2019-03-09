@@ -3,7 +3,11 @@
 <div class="container">
     <div class="span3 well">
         <center>
-        <a href="#aboutModal" data-toggle="modal" data-target="#myModal"><img src="https://st2.depositphotos.com/9223672/12056/v/950/depositphotos_120568244-stock-illustration-male-face-avatar-logo-template.jpg" name="aboutme" width="140" height="140" class="rounded-circle"></a>
+          <%if @user.avatar.attached?%>
+            <a href="#aboutModal" data-toggle="modal" data-target="#myModal"><%= image_tag @user.avatar, alt: 'avatar', width: '140', height: '140', class: 'rounded-circle' %></a>
+          <%else%>
+            <a href="#aboutModal" data-toggle="modal" data-target="#myModal"><img src="https://st2.depositphotos.com/9223672/12056/v/950/depositphotos_120568244-stock-illustration-male-face-avatar-logo-template.jpg" name="aboutme" width="140" height="140" class="rounded-circle"></a>
+          <%end%>
         <h3><%= @user.first_name %> <%= @user.last_name %></h3>
         <em class="small text-muted">Clique sur ton avatar pour voir ton profil</em>
 		</center>
@@ -18,7 +22,11 @@
                     </div>
                 <div class="modal-body">
                     <center>
-                      <img src="https://st2.depositphotos.com/9223672/12056/v/950/depositphotos_120568244-stock-illustration-male-face-avatar-logo-template.jpg" name="aboutme" width="140" height="140" border="0" class="rounded-circle">
+                      <%if @user.avatar.attached?%>
+                        <%= image_tag @user.avatar, alt: 'avatar', width: '140', height: '140', border: '0', class: 'rounded-circle' %>
+                      <%else%>
+                        <img src="https://st2.depositphotos.com/9223672/12056/v/950/depositphotos_120568244-stock-illustration-male-face-avatar-logo-template.jpg" name="aboutme" width="140" height="140" border="0" class="rounded-circle">
+                      <%end%>
                     <h3><%= @user.first_name %> <%= @user.last_name %></h3>
                     <!--
                     <span><strong>Compétences: </strong></span>

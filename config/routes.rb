@@ -5,10 +5,13 @@ Rails.application.routes.draw do
 
   root 'event#index'
 
-  resources 'event' do
+  resources :event do
   	resources :attendance
+    resources :image, only: [:create]
   end
 
-  resources 'user', only: [ :show ]
+  resources :user, only: [ :show ] do
+    resources :avatar, only: [:create]
+  end
 
 end

@@ -3,7 +3,13 @@
   <div class="row">
     <div class="col-md-9 mx-auto">
       <div class="card" style="width: 100%">
-        <img class="card-img-top" src="https://www.newstatesman.com/sites/all/themes/creative-responsive-theme/images/new_statesman_events.jpg" width="318" height="318" alt="Card image cap">
+
+        <%if @event.image.attached?%>
+          <%= image_tag @event.image, class: 'card-img-top', width: '318', height: '318', alt: 'imageevent' %>
+        <%else%>
+          <img class="card-img-top" src="https://www.newstatesman.com/sites/all/themes/creative-responsive-theme/images/new_statesman_events.jpg" width="318" height="318" alt="Card image cap">
+        <%end%>
+
         <div class="card-body">
           <h2 class="card-title"><%= @event.title %></h2>
           <hr align="left" width="42%" color=white>
