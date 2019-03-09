@@ -13,12 +13,3 @@
  *= require_tree .
  *= require_self
  */
-
- .hr_vertical{
-  border-left: 2px solid grey;
-  height: 500px;
-  position: absolute;
-  left: 50%;
-  margin-left: -3px;
-  top: 1;
- 	}
