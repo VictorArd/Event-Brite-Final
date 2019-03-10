@@ -1,0 +1,21 @@
+<div class="container-fluid">
+  <div class="d-flex flex-row justify-content-center mt-3">
+    <div>
+      <h2 class="display-4">Espace Administrateur</h2>
+      <hr>
+    </div>
+  </div>
+  <center>
+    <div>
+      <%if current_user.avatar.attached?%>
+        <%= image_tag current_user.avatar, alt: 'avatar', width: '180', height: '180', class: 'rounded-circle', alt: 'IconAvatar' %>
+      <%else%>
+        <img src="https://st2.depositphotos.com/9223672/12056/v/950/depositphotos_120568244-stock-illustration-male-face-avatar-logo-template.jpg" width="180" height="180" class="rounded-circle" alt="IconAvatar">
+      <%end%>
+      <h2><%= current_user.first_name %> <%= current_user.last_name %></h2>
+      <hr width="30%">
+      <%= link_to "Gérer les utilisateurs", admin_users_path, :class => "btn btn-secondary mb-2"%>
+      <%= link_to "Gérer les évènements", admin_events_path, :class => "btn btn-secondary ml-1 mb-2"%>
+    </div>
+  </center>
+</div>

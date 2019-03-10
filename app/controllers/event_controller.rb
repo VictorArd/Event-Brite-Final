@@ -12,7 +12,7 @@ class EventController < ApplicationController
   end
 
   def index
-    @event = Event.all
+    @event = Event.all.where(validated: true)
   end
 
   def new

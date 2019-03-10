@@ -14,4 +14,10 @@ Rails.application.routes.draw do
     resources :avatar, only: [:create]
   end
 
+  namespace :admin do
+		root 'admin#index'
+		resources :users, only: [:index, :edit, :update, :destroy]
+    resources :events
+	end
+
 end

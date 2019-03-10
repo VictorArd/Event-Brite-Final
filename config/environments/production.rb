@@ -102,6 +102,4 @@ Rails.application.configure do
     :password       => ENV['SENDGRID_PWD'],
     :domain         => 'heroku.com'
   }
-
-  config.active_storage.service = :local
 end

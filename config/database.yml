@@ -83,3 +83,7 @@ production:
   database: Event-Brite-clone_production
   username: Event-Brite-clone
   password: <%= ENV['EVENT-BRITE-CLONE_DATABASE_PASSWORD'] %>
+
+
+default: &default
+  host: localhost
