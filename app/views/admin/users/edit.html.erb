@@ -1,0 +1,27 @@
+<% if @user.errors.any? %>
+  <div class="alert alert-danger mt-3" role="alert">
+    <p>Le processus de mise à jour des utilisateurs a échoué pour les raisons suivantes:</p>
+      <ul>
+      <% @user.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+    </ul>
+  </div>
+<% end %>
+<br>
+<div class= "container-fluid">
+	<%= form_tag url_for(action: 'update'), method: "patch" do %>
+		<div id="user">
+			<p>Prénom: <%= text_field_tag 'first_name', @user.first_name, class: 'form-control mt-3', placeholder: 'Prénom'%></p>
+			<p>Nom: <%= text_field_tag 'last_name', @user.last_name, class: 'form-control mt-1', placeholder: 'Nom' %></p>
+			<p>Description: <%= text_area_tag 'description', @user.description, class: 'form-control mt-1', placeholder: 'Description' %></p>
+			<% unless @user.is_admin %>
+				<div class="checkbox mt-1">
+					<label>Administrateur: <%= check_box_tag 'is_admin', value = "1", checked = false %></label>
+				</div>
+			<% end %>
+  <br>
+			<%= submit_tag "Mettre à jour les informations", class: "btn btn-secondary mt-1" %>
+		</div>
+	<% end %>
+</div>

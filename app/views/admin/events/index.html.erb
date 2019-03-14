@@ -1,0 +1,35 @@
+<div class="container-fluid mt-3">
+
+	<% if @events.empty? %>
+	<p> Aucun évènement à valider </p>
+	<% end %>
+
+
+<div class="container">
+  <div class="row">
+    <% @events.each do |event| %>
+    <div class="col-md-4 mb-4">
+      <div class="card" style="width: 22rem;">
+        <img class="card-img-top" src="https://www.newstatesman.com/sites/all/themes/creative-responsive-theme/images/new_statesman_events.jpg" width="318" height="110" alt="Card image cap">
+        <div class="card-body">
+          <h5 class="card-title">Titre : <%= event.title %></h5>
+          <p class="card-text small text-muted mb-auto">Description: <%= event.description %></p>
+          <p class="card-text small text-muted mb-auto">Date: <%= event.start_date.strftime("%a, %h, %Y à %Hh%M") %></p>
+          <p class="card-text small text-muted mb-2">Location: <%= event.location %></p>
+          <p class="card-text small text-muted">Prix: <%= event.price %>€</p>
+          <p class="card-text small text-muted">Admin : <%= event.admin.email %></p>
+          <p class="card-text small text-muted">Validation :
+    		  	<% if event.validated.nil?%>
+    		  		En attente d'approbation
+    		  	<% else %>
+    		  		<%= event.validated %>
+    		  	<% end %></p>
+        </div>
+        <%= link_to "Vérification avant validation", edit_admin_event_path(event), :class => "text-center btn btn-outline-info btn-sm"%>
+        <%= link_to "Refuser l'évènement", admin_event_path(event), method: :delete, data: {confirm: "Refuser un événement supprimera cet événement, êtes-vous sûr ?"}, :class => "text-center btn btn-outline-danger btn-sm"%>
+      </div>
+    </div>
+    <% end %>
+  </div>
+  <hr>
+</div>

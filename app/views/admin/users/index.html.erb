@@ -1,0 +1,35 @@
+<br>
+<div class="container">
+  <div class="row">
+    <% @users.each do |user| %>
+    <div class="col-md-4 mb-4">
+      <div class="card" style="width: 22rem;">
+				<br>
+				<center>
+					<%if user.avatar.attached?%>
+						<%= image_tag user.avatar, alt: 'avatar', width: '140', height: '140', border: '0', class: 'rounded-circle' %>
+					<%else%>
+						<img src="https://st2.depositphotos.com/9223672/12056/v/950/depositphotos_120568244-stock-illustration-male-face-avatar-logo-template.jpg" name="aboutme" width="140" height="140" border="0" class="rounded-circle">
+					<%end%>
+				</center>
+	        <div class="card-body">
+          <h5 class="card-title">Prénom: <%= user.first_name %></h5>
+          <h5 class="card-title">Nom: <%= user.last_name %></h5>
+          <p class="card-text small text-muted mb-2">Description: <%= user.description %></p>
+          <p class="card-text small text-muted mb-2">Email: <%= user.email %></p>
+          <p class="card-text small text-muted">Administrateur:
+						<% if user.is_admin == false %>
+							Non
+						<% else %>
+							Oui
+						<% end %>
+					</p>
+					<%= link_to "Editer les Informations", edit_admin_user_path(user), :class => "list-group-item list-group-item-action list-group-item-info"%>
+				  <%= link_to "Supprimer l'utilisateur", admin_user_path(user), method: :delete, data: {confirm: "Etes vous sur de vouloir supprimer l'utilisateur ?"}, :class => "list-group-item list-group-item-action list-group-item-danger"%>
+        </div>
+      </div>
+    </div>
+    <% end %>
+  </div>
+  <hr>
+</div>

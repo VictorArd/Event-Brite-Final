@@ -1,0 +1,53 @@
+<% if @event.errors.any? %>
+  <div class="alert alert-danger mt-3" role="alert">
+    <p>Le processus de mise à jour de l'événement a échoué pour les raisons suivantes:</p>
+      <ul>
+      <% @event.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+    </ul>
+  </div>
+<% end %>
+
+<br><br>
+<div class="container">
+  <div class="row">
+    <div class="col-md-9 mx-auto">
+      <div class="card" style="width: 100%">
+
+        <%if @event.image.attached?%>
+          <%= image_tag @event.image, class: 'card-img-top', width: '318', height: '318', alt: 'imageevent' %>
+        <%else%>
+          <img class="card-img-top" src="https://www.newstatesman.com/sites/all/themes/creative-responsive-theme/images/new_statesman_events.jpg" width="318" height="318" alt="Card image cap">
+        <%end%>
+
+        <div class="card-body">
+          <h2 class="card-title"><%= @event.title %></h2>
+          <hr align="left" width="42%" color=white>
+          <h2 class="card-title">Descrition:</h2>
+          <p class="card-text"><small><%= @event.description %></small></p>
+          <hr align="left" width="100%" color=white>
+          <h4 class="card-text text-muted">Date: <%= @event.start_date.strftime("%a, %h, %Y à %Hh%M") %></h4>
+          <hr align="left" width="40%" color=white>
+          <h4 class="card-text text-muted mb-2">Location: <%= @event.location %></h4>
+          <hr align="left" width="35%" color=white>
+          <h4 class="card-text text-muted mb-2">Prix: <%= @event.price %>€</h4>
+          <hr align="left" width="13%" color=white>
+          <h5 class="card-text text-muted mb-2"><small>Organisateur: <%= @event.admin.email %></small></h5>
+        </div>
+        <div class="mx-auto">
+          <%= form_tag url_for(action: 'update'), method: "patch" do %>
+            <div id="user">
+                <div class="checkbox mt-1">
+                  <label>Valider l'événement : <%= check_box_tag 'validated', value = "1", checked = false %></label>
+                </div>
+              <%= submit_tag "Valider l'événement", class: "btn btn-info mt-1" %>
+            </div>
+          <% end %>
+        </div>
+        <br>
+      </div>
+    </div>
+  </div>
+</div>
+<br><br>

@@ -10,9 +10,9 @@
           <img class="card-img-top" src="https://www.newstatesman.com/sites/all/themes/creative-responsive-theme/images/new_statesman_events.jpg" width="318" height="318" alt="Card image cap">
         <%end%>
         <% if @event.validated == nil || false %>
-          <div class="text-center border border-top-0 border-danger rounded-bottom text-danger">Votre évènement n'a pas encore été validé.</div>
+          <div class="text-center border border-top-0 border-danger rounded-bottom text-danger"><i class="fa fa-times"></i> Cette évènement n'a pas encore été validé.</div>
         <% elsif @event.validated == true %>
-          <p class="text-center border border-top-0 border-primary rounded-bottom text-primary">Votre évènement est validé.</p>
+          <p class="text-center border border-top-0 border-primary rounded-bottom text-primary"><i class="fa fa-check"></i> Cette évènement à bien été validé.</p>
         <% end %>
 
         <div class="card-body">
