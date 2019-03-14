@@ -33,6 +33,10 @@
             Mon profil
           </button>
           <div class="dropdown-menu text-center" aria-labelledby="dropdownMenuButton">
+            <% if current_user.is_admin == true %>
+            <%= link_to 'ADMINISTRATION', admin_root_path, class: "dropdown-item"%>
+            <hr width="50%" color=white>
+            <% end %>
             <%= link_to 'AFFICHER MON PROFIL', user_path(current_user.id), class: "dropdown-item"%>
             <hr width="50%" color=white>
             <%= link_to 'SE DECONNECTER', destroy_user_session_path, :method => :delete, class: "dropdown-item"%>
