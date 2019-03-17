@@ -16,10 +16,12 @@
   <li>Participation à des évènements</li>
   <li>Paiements des participations avec <a href="https://stripe.com/">Stripe</a></li>
   <li>Système d'administration
-    <li>Modification de données d'utilisateurs</li>
-    <li>Suppression d'utilisateur</li>
-    <li>Validation & Refus d'évènements</li>
-    <li>Suppression d'évènements</li>
+    <ul>
+      <li>Modification de données d'utilisateurs</li>
+      <li>Suppression d'utilisateur</li>
+      <li>Validation & Refus d'évènements</li>
+      <li>Suppression d'évènements</li>
+    </ul>
   </li>
   <li>Choisir son avatar d'utilisateur</li>
   <li>Et beaucoup d'autres...</li>
